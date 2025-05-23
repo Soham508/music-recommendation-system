@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.10.0  # or latest version
+    ports:
+      - "6333:6333"  # REST API
+      - "6334:6334"  # UI
+    volumes:
+      - ./qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE_PORT=6333
+      - QDRANT__STORAGE__PATH=/qdrant/storage
+      - QDRANT__API=true
+    restart: unless-stopped
